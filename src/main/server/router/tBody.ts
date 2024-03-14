@@ -21,6 +21,7 @@ const router = new Router({
 // })
 
 function removeScriptTags(html: string) {
+  
   const regex = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
   return html.replace(regex, '');
 }
