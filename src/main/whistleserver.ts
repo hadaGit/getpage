@@ -1,15 +1,15 @@
-import whistle from 'whistle'
-import installca from 'whistle/bin/ca/cli'
-import wproxy from 'whistle/bin/proxy'
-import { enableProxy } from './proxy'
-import { getPort } from './server/portUtils'
+import whistle from 'whistle';
+import installca from 'whistle/bin/ca/cli';
+import { enableProxy, stopProxy } from './proxy';
 
-
-let port = 8123;
+let port;
 export default async function startWhistle() {
-  port = await getPort()
+  port = process.argv[3];
   const w2 = whistle({
     port,
+    username: 'admin',
+    password: 'admin123',
+    mode: 'capture',
     rules: [
       '/https?://.*/ jsAppend://{jscode} includeFilter://resH:Content-Type=/text/html.*/',
       'local.asdcaslkdjfsndfjasdnfjkasnflksadkslfd.cn http://127.0.0.1:' + process.argv[2]
@@ -58,9 +58,11 @@ export default async function startWhistle() {
                   })
                     .then((response) => response.json())
                     .then((data) => {
-                      if(data.code === 'ok'){
+                      if(data.code === 0){
                         alert('采集完成，请返回软件查看')
+                        return;
                       }
+                      alert(data.msg);
                       console.log("POST request succeeded with JSON response:", data);
                     })
                     .catch((error) => {
@@ -70,27 +72,27 @@ export default async function startWhistle() {
               })();
               `
     }
-  })
+  });
 
-  console.log(w2.getWhistlePath(), 'w2 服务启动成功：' + port)
+  console.log(w2.getWhistlePath(), 'w2 服务启动成功：' + port);
 }
 
 function installCA() {
-  installca([port])
+  installca([port]);
 }
 
-startWhistle()
+startWhistle();
 
 process.parentPort.on('message', (e) => {
-  console.log(`Message from parent: ${e.data.message}`)
+  console.log(`Message from parent: ${e.data.message}`);
   if (e.data.message === 'close') {
-    wproxy(['off'])
+    stopProxy();
   } else if (e.data.message === 'ca') {
-    installCA()
+    installCA();
   } else if (e.data.message === 'proxy') {
     enableProxy({
       host: '127.0.0.1',
       port
-    })
+    });
   }
-})
+});

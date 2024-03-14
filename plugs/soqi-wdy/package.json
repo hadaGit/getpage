@@ -6,14 +6,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "configKeyValue":[
+  "configKeyValue": [
     {
-      "k":"userName",
+      "k": "userName",
       "desc": "用户名"
     },
     {
-      "k":"password",
+      "k": "password",
       "desc": "密码"
+    },
+    {
+      "k": "cookies",
+      "desc": "cookies"
     }
   ],
   "author": "",

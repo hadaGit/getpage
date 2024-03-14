@@ -1,34 +1,31 @@
 # getpage
 
-An Electron application with Vue and TypeScript
-
-## Recommended IDE Setup
-
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)
+通用网页页面抓取工具，提取页面内容支持插件。
+有相当一部分平台只支持微信里面打开链接并限制复制，都可以直接提取保存到本地文件，并支持插件二次处理内容。
 
 ## Project Setup
 
 ### Install
 
 ```bash
-$ pnpm install
+$ npm install
 ```
 
 ### Development
 
 ```bash
-$ pnpm dev
+$ npm  run dev
 ```
 
 ### Build
 
 ```bash
 # For windows
-$ pnpm build:win
+$ npm run build:win
 
 # For macOS
-$ pnpm build:mac
+$ npm run build:mac
 
 # For Linux
-$ pnpm build:linux
+$ npm run build:linux
 ```

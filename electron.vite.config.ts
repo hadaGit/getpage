@@ -1,13 +1,18 @@
-import { resolve } from 'path'
-import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
-import vue from '@vitejs/plugin-vue'
+import { resolve } from 'path';
+import { defineConfig, externalizeDepsPlugin, bytecodePlugin } from 'electron-vite';
+import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
   main: {
-    plugins: [externalizeDepsPlugin()]
+    resolve: {
+      alias: {
+        '@resources': resolve('./resources')
+      }
+    },
+    plugins: [externalizeDepsPlugin(), bytecodePlugin()]
   },
   preload: {
-    plugins: [externalizeDepsPlugin()]
+    plugins: [externalizeDepsPlugin(), bytecodePlugin()]
   },
   renderer: {
     resolve: {
@@ -17,4 +22,4 @@ export default defineConfig({
     },
     plugins: [vue()]
   }
-})
+});

@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: getpage
+appId: com.getpage.app
+productName: 兔子抓取
 directories:
   buildResources: build
 files:
@@ -14,8 +14,12 @@ asarUnpack:
 win:
   executableName: getpage
 nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true #是否允许修改安装目录
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
+  installerIcon: 'build/icon.ico'
+  uninstallerIcon: 'build/icon.ico'
   uninstallDisplayName: ${productName}
   createDesktopShortcut: always
 mac:

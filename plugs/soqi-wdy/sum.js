@@ -1,3 +1,3 @@
-module.exports = function(a,b){
-    console.log('sum' , a + b);
-}
+module.exports = function (a, b) {
+  console.log('sum', a + b);
+};
